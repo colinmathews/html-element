@@ -378,6 +378,9 @@ Text.prototype.nodeType = 3;
 Text.prototype.nodeName = '#text';
 
 Text.prototype.__defineGetter__('textContent', function() {
+  if (this.parentElement?.nodeName?.toLowerCase() === 'script') {
+    return this.value || '';
+  }
   return escapeHTML(this.value || '');
 });
 
